@@ -9,6 +9,7 @@ class Ui_window(object):
         window.setFont(font)
         window.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         window.setWindowTitle("Cámara frigorífica")
+        # window.setWindowIcon(QtGui.QIcon("icon.png"))
         self.env_box = QtWidgets.QGroupBox(window)
         self.env_box.setGeometry(QtCore.QRect(10, 10, 231, 171))
         self.env_box.setObjectName("env_box")
@@ -134,11 +135,14 @@ class Ui_window(object):
             self.heat_flux()
             self.cop_result_label.setText(f"COP: {abs(self.cop):.2f}")
             self.effi_result_label.setText(f"Eficiencia: {abs(self.effi):.2f} %")
-            self.heat_result_label.setText(f"Calor: {(self.heat):.2f} kW")
+            self.heat_result_label.setText(f"Calor: {(self.heat*-1):.2f} kW")
         except:
             print("Error al calcular.")
     
     def delete(self):
+        self.cop = 0
+        self.effi = 0
+        self.heat = 0
         self.cop_result_label.setText("COP:")
         self.effi_result_label.setText("Eficiencia:")
         self.heat_result_label.setText("Calor:")
